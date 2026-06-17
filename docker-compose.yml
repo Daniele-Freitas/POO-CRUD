@@ -1,0 +1,33 @@
+services:
+  db-postgres:
+    image: postgres:15-alpine
+    container_name: prefeitura_postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminpassword
+      POSTGRES_DB: prefeitura_eventos
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - eventos_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: prefeitura_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@prefeitura.com
+      PGADMIN_DEFAULT_PASSWORD: adminpassword
+    ports:
+      - "8080:80"
+    depends_on:
+      - db-postgres
+    networks:
+      - eventos_network
+
+volumes:
+  postgres_data:
+
+networks:
+  eventos_network:
