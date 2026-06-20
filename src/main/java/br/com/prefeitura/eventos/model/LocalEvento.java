@@ -67,4 +67,9 @@ public class LocalEvento {
         this.criadoEm = criadoEm;
     }
 
+    @Override
+    public String toString() {
+        return this.nome + " (Capacidade: " + this.capacidade + ")"; // Exibe: Auditório Principal (Capacidade: 50)
+    }
+
 }

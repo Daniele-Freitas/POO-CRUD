@@ -78,4 +78,10 @@ public class Usuario {
         this.criadoEm = criadoEm;
     }
 
+    @Override
+    public String toString() {
+        return this.nome + " - " + this.tipo.name(); // Exibe: João Organizador - ORGANIZADOR
+    }
+
+
 }

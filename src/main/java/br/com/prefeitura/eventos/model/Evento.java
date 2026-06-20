@@ -120,4 +120,9 @@ public class Evento {
         this.criadoEm = criadoEm;
     }
 
+    @Override
+    public String toString() {
+        return this.titulo; // Exibe: Palestra de Tecnologia
+    }
+
 }
