@@ -34,8 +34,7 @@ public class InscricaoService {
         }
 
         // 3. REGRA DE NEGÓCIO: Prevenção de Reservas Duplicadas
-        // Lembra que colocamos um UNIQUE constraint no banco? Aqui nós capturamos o erro do banco 
-        // e traduzimos para uma mensagem limpa para o usuário.
+
         try {
             inscricaoDAO.inserir(inscricao);
             System.out.println("Inscrição realizada com sucesso para o evento: " + evento.getTitulo());

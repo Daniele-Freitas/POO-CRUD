@@ -1,7 +1,6 @@
 package br.com.prefeitura.eventos.dao;
 
 import br.com.prefeitura.eventos.model.Evento;
-import br.com.prefeitura.eventos.model.Usuario;
 import br.com.prefeitura.eventos.model.enums.StatusEvento;
 import br.com.prefeitura.eventos.exception.DaoException;
 
@@ -53,7 +52,6 @@ public class EventoDAO {
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
-            // CORREÇÃO: Faltava o while para percorrer todas as linhas devolvidas pelo banco
             while (rs.next()) {
                 eventos.add(mapearResultSetParaEvento(rs));
             }

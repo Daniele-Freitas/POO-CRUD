@@ -1,4 +1,3 @@
--- 1. Criação da tabela de Locais [cite: 49-51, 58-61]
 CREATE TABLE local_evento (
     id BIGSERIAL PRIMARY KEY,
     nome VARCHAR(150) NOT NULL,
@@ -8,7 +7,6 @@ CREATE TABLE local_evento (
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 2. Criação da tabela de Usuários [cite: 68-75]
 CREATE TABLE usuario (
     id BIGSERIAL PRIMARY KEY,
     nome VARCHAR(150) NOT NULL,
@@ -19,7 +17,6 @@ CREATE TABLE usuario (
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 3. Criação da tabela de Eventos [cite: 52-65]
 CREATE TABLE evento (
     id BIGSERIAL PRIMARY KEY,
     titulo VARCHAR(200) NOT NULL,
@@ -36,7 +33,6 @@ CREATE TABLE evento (
     CONSTRAINT fk_evento_organizador FOREIGN KEY (organizador_id) REFERENCES usuario(id)
 );
 
--- 4. Criação da tabela de Recursos [cite: 31-32, 35-38]
 CREATE TABLE recurso (
     id BIGSERIAL PRIMARY KEY,
     nome VARCHAR(150) NOT NULL,
@@ -45,7 +41,6 @@ CREATE TABLE recurso (
     descricao VARCHAR(255)
 );
 
--- 5. Criação da tabela associativa Evento_Recurso [cite: 33-34, 39-40]
 CREATE TABLE evento_recurso (
     evento_id BIGINT,
     recurso_id BIGINT,
@@ -55,7 +50,6 @@ CREATE TABLE evento_recurso (
     CONSTRAINT fk_er_recurso FOREIGN KEY (recurso_id) REFERENCES recurso(id) ON DELETE CASCADE
 );
 
--- 6. Criação da tabela de Inscrições [cite: 42-48]
 CREATE TABLE inscricao (
     id BIGSERIAL PRIMARY KEY,
     evento_id BIGINT NOT NULL,
@@ -67,3 +61,12 @@ CREATE TABLE inscricao (
     CONSTRAINT fk_inscricao_usuario FOREIGN KEY (usuario_id) REFERENCES usuario(id) ON DELETE CASCADE,
     CONSTRAINT uk_inscricao_unica UNIQUE (evento_id, usuario_id)
 );
+
+-- Inserindo um Local de Evento
+INSERT INTO local_evento (nome, endereco, capacidade, descricao) 
+VALUES ('Auditório Municipal', 'Praça Central, 100', 2, 'Auditório principal com palco. Capacidade reduzida para testes.');
+
+-- Inserindo Recursos
+INSERT INTO recurso (nome, tipo, capacidade, descricao)
+VALUES ('Projetor Epson', 'Equipamento Audiovisual', NULL, 'Projetor HD 4000 lumens'),
+       ('Cadeiras Plásticas', 'Mobiliário', 50, 'Cadeiras brancas sem braço');
