@@ -6,32 +6,29 @@ import java.awt.*;
 public class TelaPrincipal extends JFrame {
 
     public TelaPrincipal() {
-        setTitle("Sistema de Eventos - Prefeitura Comunitária");
-        setSize(400, 300);
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE); // Fecha a aplicação inteira
-        setLocationRelativeTo(null); // Centraliza na tela
-        setLayout(new BorderLayout(10, 10));
+        setTitle("Dashboard de Gestão - Prefeitura Comunitária");
+        setSize(900, 650);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
 
-        JLabel titulo = new JLabel("Gestão de Eventos Comunitários", SwingConstants.CENTER);
-        titulo.setFont(new Font("Arial", Font.BOLD, 18));
-        add(titulo, BorderLayout.NORTH);
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ignored) {}
 
-        JPanel panelBotoes = new JPanel(new GridLayout(3, 1, 10, 10));
-        panelBotoes.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
+        JLabel lblHeader = new JLabel("Sistema Integrado de Eventos Locais", SwingConstants.CENTER);
+        lblHeader.setFont(new Font("Arial", Font.BOLD, 16));
+        lblHeader.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        add(lblHeader, BorderLayout.NORTH);
 
-        JButton btnUsuarios = new JButton("Gerenciar Usuários");
-        JButton btnEventos = new JButton("Gerenciar Eventos");
-        JButton btnInscricoes = new JButton("Realizar Inscrições");
+        JTabbedPane tabbedPane = new JTabbedPane();
 
-        // Ações dos botões para abrir as telas secundárias
-        btnUsuarios.addActionListener(e -> new TelaUsuario().setVisible(true));
-        btnEventos.addActionListener(e -> new TelaEvento().setVisible(true));
-        btnInscricoes.addActionListener(e -> new TelaInscricao().setVisible(true));
+        // Injeção dos painéis customizados de CRUD em cada aba
+        tabbedPane.addTab("Usuários", new PainelUsuario());
+        tabbedPane.addTab("Locais", new PainelLocal());
+        tabbedPane.addTab("Eventos", new PainelEvento());
+        tabbedPane.addTab("Inscrições", new PainelInscricao());
 
-        panelBotoes.add(btnUsuarios);
-        panelBotoes.add(btnEventos);
-        panelBotoes.add(btnInscricoes);
-
-        add(panelBotoes, BorderLayout.CENTER);
+        add(tabbedPane, BorderLayout.CENTER);
     }
 }
