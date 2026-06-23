@@ -67,6 +67,15 @@ public class PainelInscricao extends JPanel {
         
         recarrregarCombos();
         atualizarTabela();
+
+        // Recarrega os combos e a tabela toda vez que o usuário clica nesta aba
+        this.addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentShown(java.awt.event.ComponentEvent e) {
+                recarrregarCombos();
+                atualizarTabela();
+            }
+        });
     }
 
     public void recarrregarCombos() {
